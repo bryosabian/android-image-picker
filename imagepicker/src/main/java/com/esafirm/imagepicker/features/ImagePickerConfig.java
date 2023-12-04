@@ -3,6 +3,7 @@ package com.esafirm.imagepicker.features;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.StyleRes;
 
 import com.esafirm.imagepicker.features.common.BaseConfig;
@@ -37,6 +38,12 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
 
     private transient String language;
 
+    @ColorInt
+    private int primaryColor = NO_COLOR;
+
+    @ColorInt
+    private int primaryColorDark = NO_COLOR;
+
     public ImagePickerConfig() {
     }
 
@@ -62,6 +69,26 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
 
     public void setLimit(int limit) {
         this.limit = limit;
+    }
+
+    @ColorInt
+    public int getPrimaryColor() {
+        return primaryColor;
+    }
+
+    public ImagePickerConfig setPrimaryColor(@ColorInt int primaryColor) {
+        this.primaryColor = primaryColor;
+        return this;
+    }
+
+    @ColorInt
+    public int getPrimaryColorDark() {
+        return primaryColorDark;
+    }
+
+    public ImagePickerConfig setPrimaryColorDark(@ColorInt int primaryColorDark) {
+        this.primaryColorDark = primaryColorDark;
+        return this;
     }
 
     public boolean isShowCamera() {
@@ -202,6 +229,8 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
         dest.writeByte(this.onlyVideo ? (byte) 1 : (byte) 0);
         dest.writeByte(this.includeAnimation ? (byte) 1 : (byte) 0);
         dest.writeByte(this.showCamera ? (byte) 1 : (byte) 0);
+        dest.writeInt(primaryColor);
+        dest.writeInt(primaryColorDark);
     }
 
     protected ImagePickerConfig(Parcel in) {
@@ -226,6 +255,8 @@ public class ImagePickerConfig extends BaseConfig implements Parcelable {
         this.onlyVideo = in.readByte() != 0;
         this.includeAnimation = in.readByte() != 0;
         this.showCamera = in.readByte() != 0;
+        this.primaryColor = in.readInt();
+        this.primaryColorDark = in.readInt();
     }
 
     public static final Creator<ImagePickerConfig> CREATOR = new Creator<ImagePickerConfig>() {

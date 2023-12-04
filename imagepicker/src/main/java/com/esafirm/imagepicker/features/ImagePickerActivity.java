@@ -3,6 +3,7 @@ package com.esafirm.imagepicker.features;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import com.esafirm.imagepicker.features.cameraonly.CameraOnlyConfig;
 import com.esafirm.imagepicker.helper.ConfigUtils;
 import com.esafirm.imagepicker.helper.IpLogger;
 import com.esafirm.imagepicker.helper.LocaleManager;
+import com.esafirm.imagepicker.helper.StatusBarUtil;
 import com.esafirm.imagepicker.helper.ViewUtils;
 import com.esafirm.imagepicker.model.Folder;
 import com.esafirm.imagepicker.model.Image;
@@ -150,6 +152,15 @@ public class ImagePickerActivity extends AppCompatActivity implements ImagePicke
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(arrowDrawable);
             actionBar.setDisplayShowTitleEnabled(true);
+
+            if (config != null) {
+                if (config.getPrimaryColor() != ImagePickerConfig.NO_COLOR) {
+                    actionBar.setBackgroundDrawable(new ColorDrawable(config.getPrimaryColor()));
+                }
+                if (config.getPrimaryColorDark() != ImagePickerConfig.NO_COLOR) {
+                    StatusBarUtil.setColor(this, config.getPrimaryColorDark());
+                }
+            }
         }
     }
 

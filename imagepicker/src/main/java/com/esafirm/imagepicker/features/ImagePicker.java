@@ -202,6 +202,17 @@ public abstract class ImagePicker {
         return this;
     }
 
+    public ImagePicker primaryColor(@ColorInt int primaryColor) {
+        config.setPrimaryColor(primaryColor);
+        return this;
+    }
+
+    public ImagePicker primaryDarkColor(@ColorInt int primaryColorDark) {
+        config.setPrimaryColorDark(primaryColorDark);
+        return this;
+    }
+
+
     public ImagePickerConfig getConfig() {
         LocaleManager.setLanguage(config.getLanguage());
         return ConfigUtils.checkConfig(config);
