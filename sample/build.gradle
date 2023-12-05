@@ -57,3 +57,6 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin'
     }
 }
+
+
+apply from: '../publish-package.gradle'
